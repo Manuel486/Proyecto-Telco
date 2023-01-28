@@ -1,0 +1,30 @@
+server:
+  port: 7071
+
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: demo-eureka-consumidor
+          uri: lb://demo-eureka-consumidor
+          predicates:
+            - Path=/api/catalogo/**
+        - id: demo-eureka-paquete
+          uri: lb://demo-eureka-paquete
+          predicates:
+            - Path=/paquete/**
+        - id: demo-eureka-recarga
+          uri: lb://demo-eureka-recarga
+          predicates:
+            - Path=/recarga/**
+        - id: demo-eureka-redes
+          uri: lb://demo-eureka-redes
+          predicates:
+            - Path=/redes/**
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
